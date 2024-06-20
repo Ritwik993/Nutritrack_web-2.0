@@ -32,6 +32,11 @@ function Search() {
       return;
     }
 
+    if (/^-/.test(query)) {
+      setError('Negative numbers are not allowed.');
+      return;
+    }
+
     setLoading(true);
     setNutritionInfo(null);
     setNotFound(false);
