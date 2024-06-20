@@ -40,7 +40,7 @@ const Navbar = ({ toggleLoginForm, setToggleLoginForm }) => {
         <h1 className="nav-logo">NutriTrack</h1>
       </div>
       <div className="nav-search">
-        <Link to="/" className="nav-links ">
+        <Link to="/home" className="nav-links ">
           Home
         </Link>
         <Link to="/about" className="nav-links ">
