@@ -40,6 +40,11 @@ import Login2 from "./components/Login2/Login2";
 import Navbar from "./components/Navbar/Navbar";
 import store from "./utils/strore";
 import { Provider } from "react-redux";
+import Login3 from "./components/Login3/Login3";
+import Beverages2 from "./components/Track-calorie/Beverages/Beverages2";
+import Breakfast2 from "./components/Track-calorie/Breakfast/Breakfast2";
+import Desserts2 from "./components/Track-calorie/Desserts/Desserts2";
+import JunkFoods2 from "./components/Track-calorie/JunkFood/JunkFoods2";
 
 function App() {
   const [toggleLoginForm, setToggleLoginForm] = useState(false);
@@ -55,9 +60,9 @@ function App() {
             setToggleLoginForm={setToggleLoginForm}
           />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/about" element={<About />} />
-            {/* <Route path="/login" element={<LoginComponent />} /> */}
+            <Route path="/" element={<Login3/>} />
             <Route path="/vitaminA" element={<VitaminA />} />
             <Route path="/vitaminB" element={<VitaminB />} />
             <Route path="/vitaminC" element={<VitaminC />} />
@@ -73,10 +78,10 @@ function App() {
             <Route path="/vitaminvK" element={<VitaminvK />} />
             <Route path="/search" element={<Seacrh />} />
             <Route path="/caloriehome" element={<Caloriehome />} />
-            <Route path="/breakfast" element={<Breakfast />} />
-            <Route path="/beverages" element={<Beverages />} />
-            <Route path="/dessert" element={<Dessert />} />
-            <Route path="/junkfood" element={<JunkFood />} />
+            <Route path="/breakfast" element={<Breakfast2 />} />
+            <Route path="/beverages" element={<Beverages2 />} />
+            <Route path="/dessert" element={<Desserts2 />} />
+            <Route path="/junkfood" element={<JunkFoods2 />} />
             <Route path="/fruits" element={<Fruits />} />
             <Route path="/vegetables" element={<Vegetables />} />
             <Route path="/nutritionist" element={<Nutritionist />} />

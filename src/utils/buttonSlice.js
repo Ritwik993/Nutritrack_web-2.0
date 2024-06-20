@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const buttonSlice=createSlice({
     name:"button",
     initialState:{
-        isLogin:false,
+        isLogin:true,
     },
     reducers:{
         toggleButton:(state)=>{

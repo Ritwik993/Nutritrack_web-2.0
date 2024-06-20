@@ -1,18 +1,20 @@
 import React, { useRef, useState } from "react";
-import "./Login2.css";
-import cross_icon from "./cross_icon.png";
+import Login_image from "./images/Login_page.jpeg"
+import "./Login3.css";
 import { validateFormData } from "../../utils/validate";
-import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleButton } from "../../utils/buttonSlice";
+import axios from 'axios';
 
-const Login2 = ({ setToggleLoginForm }) => {
+const Login3 = () => {
   const [toggleSignInForm, setToggleSignInForm] = useState(true);
   const [errMessage, setErrMessage] = useState("");
   const email = useRef(null);
   const password = useRef(null);
-  const name = useRef(null);
+  const name =useRef(null);
   const dispatch=useDispatch();
+  const navigate=useNavigate();
 
 
   const handleSignIn = async () => {
@@ -34,8 +36,9 @@ const Login2 = ({ setToggleLoginForm }) => {
             'Content-Type': 'application/x-www-form-urlencoded',
           }
         });
-        setToggleLoginForm(false);
+        navigate('/home');
         dispatch(toggleButton());
+
         console.log('Login successful:', response.data);
       } catch (error) {
         if (error.response && error.response.status === 401) {
@@ -62,7 +65,7 @@ const Login2 = ({ setToggleLoginForm }) => {
           email: email.current.value,
           password: password.current.value,
         });
-        setToggleLoginForm(false);
+        navigate('/home');
         dispatch(toggleButton());
         console.log('Sign up successful:', response.data);
       } catch (error) {
@@ -76,56 +79,46 @@ const Login2 = ({ setToggleLoginForm }) => {
   };
 
   return (
-    <div className="login_component">
-      <form className="login_form" onSubmit={(e) => e.preventDefault()}>
-        <div className="login_title">
-          <p>{toggleSignInForm ? "Sign In" : "Sign Up"}</p>
-          <img
-            src={cross_icon}
-            alt=""
-            onClick={() => setToggleLoginForm(false)}
+    <div className="login_conatiner">
+      <div className="login_image_container">
+        <img className="login_photo" src={Login_image} alt="" />
+      </div>
+      <div className="login_flex_container">
+        <form className="login_form" onSubmit={(e) => e.preventDefault()}>
+          <p className="login_text">
+            {toggleSignInForm ? "Sign In" : "Sign Up"}
+          </p>
+          {!toggleSignInForm && (
+            <input type="text" placeholder="Name" className="input_login" ref={name}/>
+          )}
+          <input
+            type="text"
+            placeholder="Email Address"
+            className="input_login"
+            ref={email}
           />
-        </div>
-
-        {!toggleSignInForm && (
-          <input type="text" placeholder="Enter your Name" ref={name} />
-        )}
-        <input type="text" placeholder="Enter your Email" ref={email} />
-        <input
-          type="password"
-          placeholder="Enter your Password" ref={password} />
-
-        {errMessage && <p className="error_message">{errMessage}</p>}
-
-        <button onClick={toggleSignInForm ? handleSignIn : handleSignUp}>
-          {toggleSignInForm ? "Sign In" : "Sign Up"}
-        </button>
-
-        {toggleSignInForm && (
-          <p>
-            New to NutriTrack ?{" "}
-            <span
-              className="login_bottom"
-              onClick={() => setToggleSignInForm(!toggleSignInForm)}
-            >
-              Click here
-            </span>
+          <input
+            type="password"
+            placeholder="Password"
+            className="input_login"
+            ref={password}
+          />
+          <p className="error_message">{errMessage}</p>
+          <button className="login_button" onClick={toggleSignInForm ? handleSignIn : handleSignUp}>
+            {toggleSignInForm ? "Sign In" : "Sign Up"}
+          </button>
+          <p
+            className="login_bottom_text"
+            onClick={() => setToggleSignInForm(!toggleSignInForm)}
+          >
+            {toggleSignInForm
+              ? "New to FoodWeb? SignUp Now"
+              : "Already have a account? Sign In Now"}
           </p>
-        )}
-        {!toggleSignInForm && (
-          <p>
-            Already have an account ?{" "}
-            <span
-              className="login_bottom"
-              onClick={() => setToggleSignInForm(!toggleSignInForm)}
-            >
-              Click here
-            </span>
-          </p>
-        )}
-      </form>
+        </form>
+      </div>
     </div>
   );
 };
 
-export default Login2;
+export default Login3;

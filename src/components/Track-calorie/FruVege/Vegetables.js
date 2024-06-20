@@ -1,15 +1,21 @@
-import React,{useEffect} from "react";
+import React,{useEffect,useState} from "react";
 import "./Vegetable.css";
-import { vegetableItems } from './config';
 import VegetableCart from "./VegetableCart";
 import { CartProvider } from "react-use-cart";
 import Tracknavbar from "../Tracknavbar";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 const Vegetables = () => {
+  const [vegetableItems,setVegetableItems]=useState([]);
   useEffect(() => {
     // Scroll to the top of the page when component mounts
+    getData();
     window.scrollTo(0, 0);
   }, []);
+  const getData=async()=>{
+    const response=await axios.get("http://localhost:8082/getAllVegetables");
+    setVegetableItems(response.data);
+  }
   return (
     <><><><div>
       <Tracknavbar />
