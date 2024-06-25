@@ -45,6 +45,7 @@ import Beverages2 from "./components/Track-calorie/Beverages/Beverages2";
 import Breakfast2 from "./components/Track-calorie/Breakfast/Breakfast2";
 import Desserts2 from "./components/Track-calorie/Desserts/Desserts2";
 import JunkFoods2 from "./components/Track-calorie/JunkFood/JunkFoods2";
+import ProfileDetails from "./components/Profile/ProfileDetails";
 
 function App() {
   const [toggleLoginForm, setToggleLoginForm] = useState(false);
@@ -64,6 +65,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/" element={<Login3/>} />
             <Route path="/vitaminA" element={<VitaminA />} />
+            <Route path="/profile" element={<ProfileDetails/>}/>
             <Route path="/vitaminB" element={<VitaminB />} />
             <Route path="/vitaminC" element={<VitaminC />} />
             <Route path="/vitaminD" element={<VitaminD />} />

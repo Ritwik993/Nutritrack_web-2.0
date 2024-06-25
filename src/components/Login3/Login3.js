@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toggleButton } from "../../utils/buttonSlice";
 import axios from 'axios';
+import { addUser } from "../../utils/userSlice";
 
 const Login3 = () => {
   const [toggleSignInForm, setToggleSignInForm] = useState(true);
@@ -15,6 +16,7 @@ const Login3 = () => {
   const name =useRef(null);
   const dispatch=useDispatch();
   const navigate=useNavigate();
+
 
 
   const handleSignIn = async () => {
@@ -38,13 +40,13 @@ const Login3 = () => {
         });
         navigate('/home');
         dispatch(toggleButton());
-
+        dispatch(addUser(email.current.value));
         console.log('Login successful:', response.data);
       } catch (error) {
         if (error.response && error.response.status === 401) {
           setErrMessage('Incorrect password. Please try again.');
         } else {
-          setErrMessage('An error occurred. Please try again later.');
+          setErrMessage('Email or password is incorrect');
         }
       }
     }
@@ -72,7 +74,7 @@ const Login3 = () => {
         if (error.response && error.response.status === 400) {
           setErrMessage('Email already exists. Please try logging in.');
         } else {
-          setErrMessage('An error occurred. Please try again later.');
+          setErrMessage('Email already exists. Please try logging in.');
         }
       }
     }

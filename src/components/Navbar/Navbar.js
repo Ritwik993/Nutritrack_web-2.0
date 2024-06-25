@@ -50,6 +50,9 @@ const Navbar = ({ toggleLoginForm, setToggleLoginForm }) => {
         <p className="nav-links sign_btn " onClick={() => handleToogle()}>
           {state ? "Sign In" : "Sign Out"}
         </p>
+        {!state &&  <Link to="/profile" className="nav-links ">
+          Profile
+        </Link>}
         <div className="hamburger">
           <RxHamburgerMenu
             className="hamburger_icon"

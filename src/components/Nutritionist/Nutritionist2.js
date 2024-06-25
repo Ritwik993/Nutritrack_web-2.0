@@ -15,7 +15,6 @@ const Nutritionist = () => {
     setNutitionistData(response.data);
   }
 
-
     return (
       <div className="main-nut">
         <h1 className="h1-main-nut">Meet the Nutritionists</h1>
