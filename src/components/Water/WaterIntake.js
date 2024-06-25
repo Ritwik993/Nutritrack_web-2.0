@@ -3,15 +3,13 @@ import './WaterIntake.css';
 import axios from 'axios';
 
 const WaterIntake = () => {
- 
-
   const [ageRange, setAgeRange] = useState('');
   const [intakeRecommendation, setIntakeRecommendation] = useState('75% of the human brain is water and 75% of a living tree is water. A person can live about a month without food, but only about a week without water.');
   const [totalIntake, setTotalIntake] = useState(0);
   const [remainingIntake, setRemainingIntake] = useState(0);
   const [waterDrank, setWaterDrank] = useState('');
   const [error, setError] = useState('');
-  const [recommendations,setRecommendations]=useState('');
+  const [recommendations, setRecommendations] = useState('');
 
   useEffect(() => {
     // Scroll to the top of the page when component mounts
@@ -19,8 +17,8 @@ const WaterIntake = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  const getData=async()=>{
-    const response=await axios.get("http://localhost:8082/getAllWaterIntakeDetails");
+  const getData = async () => {
+    const response = await axios.get("http://localhost:8082/getAllWaterIntakeDetails");
     setRecommendations(response.data);
   }
 
@@ -40,6 +38,11 @@ const WaterIntake = () => {
   };
 
   const handleIntakeUpdate = () => {
+    if (!ageRange.trim()) {
+      setError('Please select an age range.');
+      return;
+    }
+
     if (!waterDrank.trim()) {
       setError('Please enter the amount of water drank.');
       return;
@@ -53,31 +56,6 @@ const WaterIntake = () => {
     const ml = parseInt(waterDrank);
     const newTotalIntake = totalIntake + ml;
     setTotalIntake(newTotalIntake);
-  
-
-    // const recommendations = [
-    //   { ageRange: "0-6 months", intake: "150-200 ml/day" },
-    //   { ageRange: "7-12 months", intake: "200-300 ml/day" },
-    //   { ageRange: "1-3 years", intake: "300-400 ml/day" },
-    //   { ageRange: "4-8 years", intake: "400-600 ml/day" },
-    //   { ageRange: "9-13 years", intake: "600-900 ml/day" },
-    //   { ageRange: "14-18 years (boys)", intake: "1500-2500 ml/day" },
-    //   { ageRange: "14-18 years (girls)", intake: "1500-2500 ml/day" },
-    //   { ageRange: "19-30 years (men)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "19-30 years (women)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "31-50 years (men)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "31-50 years (women)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "51-70 years (men)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "51-70 years (women)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "71+ years (men)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "71+ years (women)", intake: "2500-3700 ml/day" },
-    //   { ageRange: "Pregnant (14-18 years)", intake: "2000-3000 ml/day" },
-    //   { ageRange: "Pregnant (19-30 years)", intake: "2300-3100 ml/day" },
-    //   { ageRange: "Pregnant (31-50 years)", intake: "2300-3100 ml/day" },
-    //   { ageRange: "Breastfeeding (14-18 years)", intake: "2300-3100 ml/day" },
-    //   { ageRange: "Breastfeeding (19-30 years)", intake: "2700-3800 ml/day" },
-    //   { ageRange: "Breastfeeding (31-50 years)", intake: "2700-3800 ml/day" }
-    // ];
 
     const recommendation = recommendations.find(
       (recommendation) => recommendation.ageRange === ageRange
@@ -93,7 +71,7 @@ const WaterIntake = () => {
           <>
             You need to drink between {minIntake} to {maxIntake} ml/day.
             <br />
-            <p className='water-yet'>Remaining minimum Intake: {newRemainingIntake} ml.</p>
+            <p className='water-yet'>Remaining minimum intake: {newRemainingIntake} ml.</p>
           </>
         );
       } else {
@@ -117,7 +95,7 @@ const WaterIntake = () => {
       <h1 className='water-h1'>Water Intake Calculator</h1><br />
       <div className="form-group">
         <label className='age-range'>
-          Age Range : 
+          Age Range:
           <select className='select-age' value={ageRange} onChange={handleAgeRangeChange}>
             <option className='op-age' value="">Select Age Range</option>
             <option className='op-age' value="0-6 months">0-6 months</option>
@@ -162,7 +140,6 @@ const WaterIntake = () => {
         <p className='totintake'>Total Intake: {totalIntake} ml</p>
       </div>
     </div>
-    
   );
 };
 
