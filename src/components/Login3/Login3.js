@@ -14,6 +14,7 @@ const Login3 = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name =useRef(null);
+  const number=useRef(null);
   const dispatch=useDispatch();
   const navigate=useNavigate();
 
@@ -23,7 +24,8 @@ const Login3 = () => {
     const message = validateFormData(
       "Ritwik",
       email.current.value,
-      password.current.value
+      password.current.value,
+      "1234567890"
     );
     if (message) {
       setErrMessage(message);
@@ -56,7 +58,8 @@ const Login3 = () => {
     const message = validateFormData(
       name.current.value,
       email.current.value,
-      password.current.value
+      password.current.value,
+      number.current.value,
     );
     if (message) {
       setErrMessage(message);
@@ -66,15 +69,17 @@ const Login3 = () => {
           name: name.current.value,
           email: email.current.value,
           password: password.current.value,
+          number:number.current.value,
         });
         navigate('/home');
         dispatch(toggleButton());
+        dispatch(addUser(email.current.value))
         console.log('Sign up successful:', response.data);
       } catch (error) {
         if (error.response && error.response.status === 400) {
           setErrMessage('Email already exists. Please try logging in.');
         } else {
-          setErrMessage('Email already exists. Please try logging in.');
+          setErrMessage("Email already exists. Please try logging in.");
         }
       }
     }
@@ -91,21 +96,26 @@ const Login3 = () => {
             {toggleSignInForm ? "Sign In" : "Sign Up"}
           </p>
           {!toggleSignInForm && (
-            <input type="text" placeholder="Name" className="input_login" ref={name}/>
+            <input type="text" placeholder="Name" className="input_login" ref={name} required/>
           )}
           <input
             type="text"
             placeholder="Email Address"
             className="input_login"
             ref={email}
+            required
           />
           <input
             type="password"
             placeholder="Password"
             className="input_login"
             ref={password}
+            required
           />
-          <p className="error_message">{errMessage}</p>
+          {!toggleSignInForm && (
+            <input type="number" placeholder="Phone Number" className="input_login" ref={number} required/>
+          )}
+          {errMessage && <p className="error_message">{errMessage}</p>}
           <button className="login_button" onClick={toggleSignInForm ? handleSignIn : handleSignUp}>
             {toggleSignInForm ? "Sign In" : "Sign Up"}
           </button>

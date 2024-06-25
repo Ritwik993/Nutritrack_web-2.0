@@ -1,6 +1,7 @@
-export const validateFormData = (name,email, password) => {
+export const validateFormData = (name,email, password,number) => {
   const nameCheck=/^[A-Za-z\s]+$/.test(name);
-
+  const numberCheck=/^(\+\d{1,3}[- ]?)?\d{10}$/.test(number);
+ 
   const emailCheck = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/.test(
     email
   );
@@ -10,5 +11,6 @@ export const validateFormData = (name,email, password) => {
   if(!nameCheck) return "Name is not valid";
   if (!emailCheck) return "Email is not valid";
   if (!passwordCheck) return "Password is not valid";
+  if (!numberCheck) return "Phone number is not valid";
   return null;
 };

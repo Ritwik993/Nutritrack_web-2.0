@@ -46,13 +46,14 @@ const Navbar = ({ toggleLoginForm, setToggleLoginForm }) => {
         <Link to="/about" className="nav-links ">
           About
         </Link>
+        {!state &&  <Link to="/profile" className="nav-links ">
+          Profile
+        </Link>}
         {/* <Link to="/" className='nav-links' onClick={handleLogOut}>Logout</Link> */}
         <p className="nav-links sign_btn " onClick={() => handleToogle()}>
           {state ? "Sign In" : "Sign Out"}
         </p>
-        {!state &&  <Link to="/profile" className="nav-links ">
-          Profile
-        </Link>}
+       
         <div className="hamburger">
           <RxHamburgerMenu
             className="hamburger_icon"
